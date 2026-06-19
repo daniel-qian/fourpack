@@ -1,0 +1,14 @@
+# 真空验收留底（throwaway，不进公开仓库）
+.check-*-tmp/
+
+# OS / 编辑器杂物
+.DS_Store
+Thumbs.db
+*.swp
+desktop.ini
+
+# 依赖 / 构建（本仓库目前没有，留着以防小白克隆后跑东西）
+node_modules/
+dist/
+.env
+.env.local

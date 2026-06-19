@@ -1,0 +1,53 @@
+{
+  "features": [
+    {
+      "id": "feat-001",
+      "name": "fourpack 起步清单（粘贴版 prompt）",
+      "description": "可粘进任意 AI 对话框的 prompt：空文件夹里运行，反问'你想做啥项目'，生成针对该项目定制的四件套（AGENTS/CONTEXT/progress/session-handoff，含 maker+checker 一条），说人话、非通用模板。MVP Layer 0，兼 README + 视频引流清单。",
+      "dependencies": [],
+      "status": "done",
+      "evidence": "2026-06-19 落地『四件套起步清单.md』，经 feat-003 真空 dogfood 双轮验收过。补了根因：技术词首次出现须解释、决策点先替用户拍默认。Gate: init.sh 绿。"
+    },
+    {
+      "id": "feat-002",
+      "name": "fourpack skill（Layer 1）",
+      "description": "把 feat-001 的 prompt 包成 Claude Code skill（.claude/skills/fourpack/SKILL.md），一键调用，行为与粘贴版一致。",
+      "dependencies": ["feat-001"],
+      "status": "done",
+      "evidence": "2026-06-19 落地 SKILL.md，红线段加固（两类黑话分治 + 决策点拍默认）。Gate: init.sh 绿。"
+    },
+    {
+      "id": "feat-003",
+      "name": "真空文件夹 dogfood 验收",
+      "description": "真空子文件夹跑 feat-001（小白例=喝水网页），独立 checker 验三条验收线 + dogfood 黑话红线。",
+      "dependencies": ["feat-001"],
+      "status": "done",
+      "evidence": "2026-06-19 examples/water-tracker/（原 .dogfood，Danny 嫌名字像骂人已改名）。三条验收线 PASS；黑话红线首轮打回（localStorage/框架裸术语）→修 prompt+skill 根因+样本→同一 checker 复验 PASS 无新坑。写的人(我)与验的人(独立 agent)分开。"
+    },
+    {
+      "id": "feat-004",
+      "name": "英文版起步清单",
+      "description": "出英文版『四件套起步清单』，对接视频脚本已有英文口播，覆盖英文受众。",
+      "dependencies": ["feat-001"],
+      "status": "done",
+      "evidence": "2026-06-19 落地英文版『four-pillars-starter-checklist.md』，与最终中文母版一一对应（5 文件 + roles.md 三人 + grill→loop 节奏 + 收尾句）。独立 checker（扮英语小白+中英审校）真空跑 prompt 产出 5 文件、A~G 全 PASS、四条硬指令无丢失、grill 对小白渲染成 interview 不漏黑话、品牌接 Four Pillars、init.sh 没被新文件搞红。两条地道度润色已改（line16 引号名词、line34 the same you）。证据：.issues/feat-004/found-20260619-150917.md。注：英文不单独 fork skill——fourpack skill 跟用户语言走。Gate: init.sh 绿。"
+    },
+    {
+      "id": "feat-005",
+      "name": "产物再生成一个极简 roles.md",
+      "description": "fourpack 给小白生成的东西里，除四件套外再生成一个最小圆桌——只有 1 个 PM + 1 个 UI/UX + 1 个 viewer，越简单越好，别照搬多人桌。要并进粘贴 prompt + skill 两种形态。",
+      "dependencies": ["feat-001", "feat-002"],
+      "status": "done",
+      "evidence": "2026-06-19 落地：粘贴版『四件套起步清单.md』+ skill『SKILL.md』都加了第 5 个生成文件 roles.md（PM/UI/UX/viewer 三人，挂在 Loop 支柱下、明写『不是第五件套』不冲淡四件套品牌，viewer=checker）。独立 checker 真空文件夹实跑（examples 喝水网页）双证：6 条专项线 A~F + 3 条原验收线全 PASS，硬契约零失败，无占位符。证据：.check-feat005-tmp/ + .issues/feat-005/found-20260619-145251.md。Danny 已拍：fourpack 自身 dev roles.md 不瘦身（保留 6 人桌）。Gate: init.sh 绿。"
+    },
+    {
+      "id": "feat-006",
+      "name": "grill → loop/AFK 范式并进产物",
+      "description": "把'先主动 grill 访谈敲定计划 → 再进 loop / 无人值守 AFK（maker+checker 自循环）'这个简单范式合并进 fourpack 产物，同样形态=粘贴 prompt + skill。参考现有 grill-me / grill-with-docs / begin-loop / auto-loop。保持极简，别做成长教程。",
+      "dependencies": ["feat-001", "feat-002"],
+      "status": "done",
+      "evidence": "2026-06-19 落地：grill→loop/AFK 节奏并进现有两个产物（不开新文件）。粘贴版『四件套起步清单.md』:31-34 加进 AGENTS.md 的『干活节奏』规矩 + :64-73 给小白一句可直接照说的话；skill『SKILL.md』:27 + :42 同步。小白直面的粘贴版里 grill/loop/AFK 三个词全用大白话讲、零裸黑话。独立 checker 真空跑（记单词网页）A~H 全 PASS，生成的 AGENTS.md 确含该节奏规矩、针对项目、说人话，没膨胀成长教程。证据：.check-feat006-tmp/ + .issues/feat-006/found-20260619-150623.md。Gate: init.sh 绿。"
+    }
+  ],
+  "_note": "MVP（feat-001~003）已闭环可交付。2026-06-19 晚 Danny 给了 feat-004~006 + 一个待解决问题（埋点：无后端产品怎么统计使用，见 session-handoff.md）。本 session 不再实现，换新 session 继续。"
+}

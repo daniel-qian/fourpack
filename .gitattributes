@@ -1,0 +1,5 @@
+# Shell 脚本强制 LF，避免别人 clone 到 mac/linux 跑 `bash init.sh` 报 bad interpreter
+*.sh text eol=lf
+
+# 文本默认按平台 checkout，仓库内统一 LF
+* text=auto
