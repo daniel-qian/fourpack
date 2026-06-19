@@ -3,7 +3,9 @@
 ## Current State（2026-06-19 深夜）
 
 **所有已立项 feature（feat-001~006）全部 done，且每个都独立 checker 验过。** `init.sh` 绿。
-唯一未闭环的是**埋点**——方向已定，但**等 Danny 点头**才折进产物（见下）。本 session 是 loop 模式连跑：feat-005 → init.sh 文档修复 → feat-006 → feat-004，每个 maker→独立 checker。
+**已开源发布**：https://github.com/daniel-qian/fourpack（PUBLIC，main）。**本地目录已由 build4me 改名为 fourpack。**
+**视频 v2 真机演示脚本已写**（`D:\Click-Reader\...\four-pillars-5min-script.md`，github 链接已回填）。
+唯一未闭环的是**埋点**——方向已定，但**等 Danny 点头**才折进产物（见下）。本 session loop 连跑：feat-005 → init.sh 文档修复 → feat-006 → feat-004 → 发布 GitHub + 改名 + 写 v2 脚本，每个 feature 都 maker→独立 checker。
 
 ## 已交付（done）
 
@@ -30,4 +32,5 @@
 
 ## Next（新 session 第一件事）
 
+**注意：本地目录已改名 D:\build4me → D:\fourpack。新 session 在 `D:\fourpack` 里冷启动**（旧的 build4me 路径已不存在；harness 文件全随文件夹搬过去了，冷启动照常）。
 读 `session-handoff.md` + 本文件。已无待做 feature。下一步要么 Danny 点头后落地埋点，要么等视频发出去看真实小白反馈再定新方向。

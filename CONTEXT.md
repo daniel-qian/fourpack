@@ -25,7 +25,9 @@
 - 用户是被长教程吓跑的小白；**任何产出说人话、零黑话、能一口气读完**。
 - 反 SaaS / 反过度工程：最简能跑的形态优先。
 - self-demo / dogfood 是真实可验证的护城河，不是 PPT。
-- **正式名 = `fourpack`（中文「四件套」）**（2026-06-19 圆桌锁定）。接 Danny 技术号视频品牌，看完视频搜「四件套」的人能对上 → 视频→产品闭环。`build4me` 被否（外包气味 + 跟品牌脱节）。
+- **正式名 = `fourpack`（中文「四件套」）**（2026-06-19 圆桌锁定，二次确认）。接 Danny 技术号视频品牌，看完视频搜「四件套」的人能对上 → 视频→产品闭环。`build4me` 被否（外包气味 + 跟品牌脱节）。
+- **已开源发布**（2026-06-19）：**https://github.com/daniel-qian/fourpack**（PUBLIC，main）。本地目录也由 `build4me` 改名为 `fourpack`（与仓库名/品牌一致）。视频 CTA 贴这个链接。
+- **视频 v2 脚本 = 真机演示版**：`D:\Click-Reader\marketing\video\drafts\four-pillars-5min-script.md`（旧概念拆解版另存 `-v1-explainer.md`）。流程：国内 agent 平台 → 粘贴清单 setup → 看四件套+roles → 让 agent 做喝水互动网页 → grill + AFK loop → 做出来 → 更新 harness 留冷启动。护城河 = "AI 先反问你 + checker 打回 maker" 两个反差镜头。
 - **交付形态 = 粘贴版 prompt 打底 + 包成 skill**（2026-06-19 锁定）。Layer 0 = `四件套起步清单.md`（粘进任意对话框零安装可用，兼 README + 视频引流清单）；Layer 1 = `.claude/skills/fourpack/SKILL.md`。**service app = v2，不进 MVP。**
 
 ## MVP 验收线（feat-003 三条）

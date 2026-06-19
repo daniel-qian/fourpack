@@ -4,7 +4,12 @@
 
 ## 一句话
 
-**feat-001~006 全部 done 并独立验收过，`init.sh` 绿，没有待做 feature。** 唯一悬着的是埋点——方向已定，等 Danny 点头才折进产物。
+**feat-001~006 全部 done 并独立验收过，`init.sh` 绿，已开源发布到 GitHub（PUBLIC），本地目录已改名 build4me→fourpack，视频 v2 真机演示脚本已写。** 没有待做 feature。唯一悬着的是埋点——方向已定，等 Danny 点头才折进产物。
+
+## ⚠️ 路径已变（新 session 必读）
+
+**本地目录已由 `D:\build4me` 改名为 `D:\fourpack`。** 新 session 请在 **`D:\fourpack`** 里冷启动，旧路径不存在了。harness 文件随文件夹整体搬过去，冷启动照常。
+GitHub：**https://github.com/daniel-qian/fourpack**（PUBLIC，main，已 push）。
 
 ## 已交付（done，别重做）
 
