@@ -6,7 +6,8 @@
 **已开源发布**：https://github.com/daniel-qian/fourpack（PUBLIC，main）。**本地目录待由 build4me 改名为 fourpack（末步需 Danny 终端手动，会话锁着改不了）。**
 **feat-007 = fourpack-loop 技能**（新）：`.claude/skills/fourpack-loop/SKILL.md`——触发 + 一句功能需求 → 自动跑 maker→checker 循环，用 roles.md 三角色（PM/UI-UX/viewer）出声挑错（可视化思考，给视频用）。
 **视频脚本已升到 v3**（`D:\Click-Reader\...\four-pillars-5min-script.md`）：开场口播换 Danny 版（四工程+收藏夹吃灰+5分钟懂&上手）、平台坐实 minimax code、前半段对齐已录 4:44、新增 loop 段（触发 fourpack-loop + 三角色出声挑错）+ 收尾 CTA。Venessa+Will viewer 裁决过，3 条已改进（开场 harness 裸甩→框成"唬人词"立刻接大白话；B6 loop 段加角色卡+前后对比特写；续段先打样片验证平台+预案B）。
-唯一未闭环=**埋点**（方向已定，等 Danny 点头）。本 session loop 连跑：feat-005 → init.sh 修复 → feat-006 → feat-004 → 发布+改名+脚本 → feat-007 loop 技能 + 脚本 v3，每个都 maker→独立 checker/viewer。
+**loop 交付补齐**（2026-06-20）：Danny 发现粘贴版跑完没有 `.claude/skills/` 路径（预期——prompt 不生成 skill，且对话框平台不吃 skill）。定了两层交付：①对话框用户 → 中英清单各加一段 **loop prompt 粘贴块**（压缩版 fourpack-loop，用 roles.md 三角色自挑错，零安装）；②Claude Code 用户 → README 写清 **clone 仓库**装 `fourpack` / `fourpack-loop` 两个技能（或拷两个 skill 文件夹）。setup 粘贴块保持极简、不塞 skill 文件。
+唯一未闭环=**埋点**（方向已定，等 Danny 点头）。本 session loop 连跑：feat-005 → init.sh 修复 → feat-006 → feat-004 → 发布+改名+脚本 → feat-007 loop 技能 + 脚本 v3 → loop 两层交付，每个都 maker→独立 checker/viewer。
 
 ## 已交付（done）
 

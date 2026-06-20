@@ -84,4 +84,23 @@ flaws and fix them, and only come back to me when you're stuck.
 
 This way it **interviews you first, then writes and checks its own work** — and you don't have to watch every step.
 
+## Want it to write, then catch its own mistakes? Paste this too (loop)
+
+The line above is the lightweight version. If you want it to **pass three checks before handing it back** — using the three gatekeepers in the `roles.md` it just generated — paste this in (swap the first line for the feature you actually want):
+
+```text
+I want to add a feature: ___ (say what you want in one sentence).
+Don't rush to say "done." Do it like this:
+1. First make sure you understand what I want (ask me a question or two if unsure), then write a first version.
+2. Then switch hats and bring out the three gatekeepers from this project's roles.md, one at a time,
+   each saying out loud what's wrong:
+   - PM: is this actually useful / did it drift off course?
+   - UI/UX: will a first-time user get it / know what to click?
+   - the picky tester: is it for show / is it slow / would I use it again?
+3. Fix what they caught, let them sweep once more; only tell me it's done when there's nothing left.
+(Key: the you that writes and the you that finds faults must be separate — don't grade your own work.)
+```
+
+> On Claude Code this is already packaged as the `fourpack-loop` skill, so you don't paste it each time — see GitHub: github.com/daniel-qian/fourpack.
+
 > This checklist itself was made with this exact method. Not a slide deck — it's actually running.
