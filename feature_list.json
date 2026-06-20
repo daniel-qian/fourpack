@@ -47,7 +47,15 @@
       "dependencies": ["feat-001", "feat-002"],
       "status": "done",
       "evidence": "2026-06-19 落地：grill→loop/AFK 节奏并进现有两个产物（不开新文件）。粘贴版『四件套起步清单.md』:31-34 加进 AGENTS.md 的『干活节奏』规矩 + :64-73 给小白一句可直接照说的话；skill『SKILL.md』:27 + :42 同步。小白直面的粘贴版里 grill/loop/AFK 三个词全用大白话讲、零裸黑话。独立 checker 真空跑（记单词网页）A~H 全 PASS，生成的 AGENTS.md 确含该节奏规矩、针对项目、说人话，没膨胀成长教程。证据：.check-feat006-tmp/ + .issues/feat-006/found-20260619-150623.md。Gate: init.sh 绿。"
+    },
+    {
+      "id": "feat-007",
+      "name": "fourpack-loop 技能（可触发的循环编排）",
+      "description": "产物里缺一个真正可触发的 loop 技能（feat-006 只把循环写成 AGENTS.md 的节奏规矩，纯对话框够用，但 Claude Code 用户没有一键触发的循环）。补一个 .claude/skills/fourpack-loop：触发 + 一句功能需求 → 自动跑 maker→checker 循环，用 roles.md 的 PM/UI-UX/viewer 当独立检查官、逐个出声点评再让 maker 改（可视化思考过程，给视频用）。Danny 录视频时触发演示。",
+      "dependencies": ["feat-002", "feat-005"],
+      "status": "done",
+      "evidence": "2026-06-19 落地 .claude/skills/fourpack-loop/SKILL.md：6 步（对齐→maker 写→三角色逐个出声挑错→改→复检→收尾），红线=写的人≠检查的人、每步出声、零黑话、别过度。init.sh required 已纳入该 skill；fourpack 设置 skill 收尾处提示了它（Claude Code 用户用，纯对话框用户回退到手动节奏）。Venessa+viewer 裁决见 .issues/feat-007/。Gate: init.sh 绿。"
     }
   ],
-  "_note": "MVP（feat-001~003）已闭环可交付。2026-06-19 晚 Danny 给了 feat-004~006 + 一个待解决问题（埋点：无后端产品怎么统计使用，见 session-handoff.md）。本 session 不再实现，换新 session 继续。"
+  "_note": "feat-001~007 全部 done 并独立验收。已开源 https://github.com/daniel-qian/fourpack（PUBLIC）。本地目录 build4me→fourpack（改名末步需 Danny 终端手动）。视频 v2 真机演示脚本已录（4:44，minimax code）+ 续 loop 段。唯一未闭环=埋点（等 Danny 点头）。"
 }

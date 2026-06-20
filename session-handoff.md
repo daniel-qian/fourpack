@@ -4,7 +4,7 @@
 
 ## 一句话
 
-**feat-001~006 全部 done 并独立验收过，`init.sh` 绿，已开源发布到 GitHub（PUBLIC），本地目录已改名 build4me→fourpack，视频 v2 真机演示脚本已写。** 没有待做 feature。唯一悬着的是埋点——方向已定，等 Danny 点头才折进产物。
+**feat-001~007 全部 done 并独立验收过，`init.sh` 绿，已开源发布到 GitHub（PUBLIC），视频脚本到 v3（含 loop 段）。** feat-007 = 新增 `fourpack-loop` 自循环技能。没有待做 feature。两件悬着：①埋点（方向已定，等 Danny 点头）；②本地目录改名 build4me→fourpack 末步要 Danny 终端手动跑。
 
 ## ⚠️ 路径已变（新 session 必读）
 

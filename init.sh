@@ -19,6 +19,7 @@ required=(
   "roles.md"
   "四件套起步清单.md"
   ".claude/skills/fourpack/SKILL.md"
+  ".claude/skills/fourpack-loop/SKILL.md"
 )
 for f in "${required[@]}"; do
   if [ ! -s "$f" ]; then

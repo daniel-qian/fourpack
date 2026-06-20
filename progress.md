@@ -1,11 +1,12 @@
 # progress.md — 笔记本（冷启动也能读懂）
 
-## Current State（2026-06-19 深夜）
+## Current State（2026-06-20）
 
-**所有已立项 feature（feat-001~006）全部 done，且每个都独立 checker 验过。** `init.sh` 绿。
-**已开源发布**：https://github.com/daniel-qian/fourpack（PUBLIC，main）。**本地目录已由 build4me 改名为 fourpack。**
-**视频 v2 真机演示脚本已写**（`D:\Click-Reader\...\four-pillars-5min-script.md`，github 链接已回填）。
-唯一未闭环的是**埋点**——方向已定，但**等 Danny 点头**才折进产物（见下）。本 session loop 连跑：feat-005 → init.sh 文档修复 → feat-006 → feat-004 → 发布 GitHub + 改名 + 写 v2 脚本，每个 feature 都 maker→独立 checker。
+**所有已立项 feature（feat-001~007）全部 done，且每个都独立 checker/viewer 验过。** `init.sh` 绿。
+**已开源发布**：https://github.com/daniel-qian/fourpack（PUBLIC，main）。**本地目录待由 build4me 改名为 fourpack（末步需 Danny 终端手动，会话锁着改不了）。**
+**feat-007 = fourpack-loop 技能**（新）：`.claude/skills/fourpack-loop/SKILL.md`——触发 + 一句功能需求 → 自动跑 maker→checker 循环，用 roles.md 三角色（PM/UI-UX/viewer）出声挑错（可视化思考，给视频用）。
+**视频脚本已升到 v3**（`D:\Click-Reader\...\four-pillars-5min-script.md`）：开场口播换 Danny 版（四工程+收藏夹吃灰+5分钟懂&上手）、平台坐实 minimax code、前半段对齐已录 4:44、新增 loop 段（触发 fourpack-loop + 三角色出声挑错）+ 收尾 CTA。Venessa+Will viewer 裁决过，3 条已改进（开场 harness 裸甩→框成"唬人词"立刻接大白话；B6 loop 段加角色卡+前后对比特写；续段先打样片验证平台+预案B）。
+唯一未闭环=**埋点**（方向已定，等 Danny 点头）。本 session loop 连跑：feat-005 → init.sh 修复 → feat-006 → feat-004 → 发布+改名+脚本 → feat-007 loop 技能 + 脚本 v3，每个都 maker→独立 checker/viewer。
 
 ## 已交付（done）
 
