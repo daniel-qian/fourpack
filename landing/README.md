@@ -87,3 +87,25 @@ location ~ ^/(zh|en)/fourpack(?:/.*)?$ {
   proxy_set_header X-Forwarded-Proto $scheme;
 }
 ```
+
+## Overseas mirror (Vercel)
+
+The same code also runs as an overseas mirror on Vercel for fast global access:
+**https://fourpack.vercel.app** (→ redirects to `/zh`, English at `/en`).
+
+- Vercel project: `kks-projects-84cf18eb/fourpack`, root directory `landing`,
+  connected to GitHub `daniel-qian/fourpack`. **Pushing to `main` auto-deploys.**
+- `api/index.mjs` is a serverless function that reuses the exact same zh/en
+  templating from `server.mjs` (see `createRequestListener`). `vercel.json`
+  rewrites every path to it, so it serves pages, static assets, and the counter.
+- The counter cannot use a local file on Vercel's ephemeral filesystem, and we
+  don't want a new database. So `api/_store.mjs` is a **server-side proxy**: it
+  forwards reads/writes to the authoritative China counter (`FOURPACK_UPSTREAM`,
+  default `https://app.ima-read.com/zh/fourpack`). One counter, real numbers,
+  no new datastore. If the upstream is briefly unreachable from Vercel's region,
+  stats degrade to zeros and copy events are dropped rather than erroring.
+- Optional env on the Vercel project: `BASE_PATHS` (default `/zh,/en`),
+  `FOURPACK_UPSTREAM` (default as above).
+
+From China you generally need a proxy to reach Vercel; the CLI honors it via
+`NODE_USE_ENV_PROXY=1` plus `HTTP_PROXY`/`HTTPS_PROXY`.

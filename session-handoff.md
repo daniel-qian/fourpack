@@ -4,7 +4,7 @@
 
 ## 一句话
 
-**fourpack feat-001~008 全 done 并独立验收，`init.sh` 绿，已开源 PUBLIC；landing 已上线 app.ima-read.com 的 zh/en 路径，2026-06-22 又做了『复制完整命令块 + 可展开 + 去提示词改命令』改版并重新部署验过。本轮改动尚未 git commit。**
+**fourpack feat-001~009 全 done 并独立验收，`init.sh` 绿，已开源 PUBLIC。landing 双部署:国内权威 app.ima-read.com/zh|en/fourpack(ECS,权威计数源)+ 海外镜像 https://fourpack.vercel.app(Vercel serverless,计数代理回国内,push main 自动部署)。所有改动已 commit + push 到 main。**
 
 ## ⚠️ 路径（新 session 必读）
 
@@ -68,18 +68,27 @@ scp public/index.html public/styles.css public/app.js root@120.55.97.151:/srv/fo
 ssh root@120.55.97.151 "systemctl restart fourpack-landing && cd /srv/fourpack-landing && /root/.nvm/versions/node/v23.5.0/bin/npm run smoke"
 ```
 
+## feat-009 海外 Vercel 镜像（2026-06-22 新增）
+
+- 线上:**https://fourpack.vercel.app**(`/` → 307 `/zh`,英文 `/en`)。
+- Vercel 项目 `kks-projects-84cf18eb/fourpack`,root directory=`landing`,已 git connect `daniel-qian/fourpack`,生产分支 `main` → **push main 自动部署**。
+- 代码(都在 `landing/`):`api/index.mjs`(serverless,复用 `server.mjs` 的 `createRequestListener` 同套 zh/en 模板)+ `api/_store.mjs`(计数**服务端代理**到 `FOURPACK_UPSTREAM`,默认国内 API)+ `vercel.json`(全路由 rewrite 到函数、`/`→`/zh`、includeFiles public)。
+- 计数器:Vercel 文件系统临时、又不新增数据库,所以代理读/写回国内权威计数;上游不可达优雅降级 0。**国内 ECS 仍是权威源**,Vercel 是镜像。
+- 国内访问 Vercel / 跑 vercel CLI 必须带代理:`NODE_USE_ENV_PROXY=1` + `HTTP_PROXY/HTTPS_PROXY`。
+- 设 rootDirectory 用的是 Vercel REST API PATCH(token 在 `C:\Users\86139\AppData\Roaming\com.vercel.cli\Data\auth.json` 的 `.token`);`vercel link` 默认不设 rootDirectory。
+
 ## 视频（Click-Reader，配套，非 fourpack 仓库内容）
 
 - 4packs 短视频目录：`D:\build4me\4packs-marketing\video\videos\002-fourpack-short\`
 - 当前已可把 landing 补进结尾 5 秒：展示 `app.ima-read.com/zh/fourpack`、两个复制按钮、计数器、GitHub/域名卡片。
 - Danny 出片流程 = **口播稿直接进剪映 TTS**（记忆 [[danny-voiceover-tts-workflow]]）；**别给他 SVG**（记忆 [[danny-no-svg-use-raster]]）。
 
-## 仍待 Danny（3 件）
+## 仍待 Danny
 
-1. **本轮 landing 改动尚未 commit**：工作区有 `landing/` 5 文件 + 三个 harness 文件改动。建议 `git add -A && git commit -m "feat(landing): copy full command blocks + expandable view + 去提示词改命令"`（push 与否 Danny 定）。
-2. 本地改名 build4me→fourpack（终端手动）。
-3. git 历史 imaread 抹除（force-push 改写历史，破坏性，等点头）。
-4. 远端 `.bak-20260622/`（旧版备份）线上确认无误后可删。
+1. 本地改名 build4me→fourpack（终端手动,会话锁着改不了）。
+2. git 历史 imaread 抹除（force-push 改写历史，破坏性，等点头）。
+3. 远端 `.bak-20260622/`（旧版备份）线上确认无误后可删。
+4. 海外计数依赖国内 API 可达;若想让海外独立计数,需点头才考虑引入数据存储(当前 scope 不允许擅自加)。
 
 ## 硬规则（先于一切，沿用）
 

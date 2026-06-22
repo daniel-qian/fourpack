@@ -63,7 +63,15 @@
       "dependencies": ["feat-001", "feat-007"],
       "status": "done",
       "evidence": "2026-06-21 已上线到 https://app.ima-read.com/zh/fourpack 和 /en/fourpack。远端 systemd 服务 fourpack-landing 监听 127.0.0.1:4173，Nginx 只代理 ^/(zh|en)/fourpack，不接管 /fourpack，保留 imaread 的语言跳转逻辑。JSONL 只记 setup/loop 按钮点击，页面显示公开计数器。验证：本地 npm run smoke PASS；远端 npm run smoke PASS；公网 curl zh/en 200、/fourpack 仍 307 到 /zh/fourpack；真实浏览器打开公网 zh/en，点击两个按钮后计数 setup=1 loop=1。Gate: init.sh 绿。 | 2026-06-22 landing 改版并已重新部署：(1) 复制按钮之前只复制被砍掉的一句话（fourpack：… 短调用，纯对话框没用），改为复制清单里的完整命令块（zh/en 各一段，data-copy-text 带换行）；(2) 每张卡加可展开 <details>『展开完整命令 / Show the full command』，默认折叠、<pre> 内可滚；(3) 全面去掉『提示词 / prompt』字样改用『命令』（顶部 CTA『复制两个提示词』→改成滚动链接『看这两个命令 / See the two commands』，按钮『复制 setup/loop 命令』，EN headline『Two starter prompts→commands』），避免被当成提示词复制器、为以后扩内容留口。改源：server.mjs（pageCopy 全量命令块 + expandLabel）、public/index.html（details/summary/pre）、public/styles.css、smoke.mjs（断言改 Two starter commands）、landing/README.md。部署：scp 5 文件到 /srv/fourpack-landing（先备份到 .bak-20260622/），systemctl restart fourpack-landing。验证：本地 npm run smoke PASS；远端 npm run smoke PASS；公网 zh/en 200、/fourpack 仍 307；live HTML 确认完整命令块在页内 + 复制属性、命令文案、0 处『提示词/prompt』残留；计数 setup=4 loop=3 部署后保留未重置（EVENTS_PATH 在 /var/lib 外挂）。Gate: init.sh 绿。"
+    },
+    {
+      "id": "feat-009",
+      "name": "landing 海外 Vercel 部署（push 自动部署 + 计数代理）",
+      "description": "把 feat-008 的 landing 同步部署一份到 Vercel（海外节点），让国外用户快速访问；保持无登录、不新增数据库；并接上 GitHub，push main 即自动部署。",
+      "dependencies": ["feat-008"],
+      "status": "done",
+      "evidence": "2026-06-22 上线 https://fourpack.vercel.app（/ → 307 /zh，英文 /en）。做法：server.mjs 抽出 createRequestListener（store 可注入、调用改 await）；api/index.mjs 作为 Vercel serverless 函数复用同一套 zh/en 模板；vercel.json 全路由 rewrite 到函数 + / 重定向 /zh + includeFiles 带 public；计数器不落本地文件、不新增数据库，改用 api/_store.mjs 服务端代理读/写到国内权威计数 API（FOURPACK_UPSTREAM 默认 app.ima-read.com/zh/fourpack），一个计数器、真实数字、上游不可达时优雅降级为 0。Vercel 项目 kks-projects-84cf18eb/fourpack，root directory=landing，已 vercel git connect 到 daniel-qian/fourpack、生产分支 main、rootDirectory 经 API PATCH 设为 landing → 之后 push main 自动部署。验证：本地 npm run smoke PASS（重构 + readBody 兼容后）；本地代理函数自检 PASS（zh/en 页 + 静态 + 代理读到上游 setup/loop + 写穿透使上游真实 +1）；线上 curl：/ 307→/zh、/zh 200、/en 200、/zh/styles.css+app.js 200、/zh/api/stats 读到国内真实数、线上 POST /en/api/copy 使国内权威计数 setup 5→6 实时同步；rewrite 后函数 req.url 保留原始路径、海外 iad1 节点可达国内 API、无部署保护拦截。Gate: init.sh 绿。注：国内 ECS 部署仍是权威计数源，Vercel 是只读/写穿透的镜像。"
     }
   ],
-  "_note": "feat-001~008 全部 done。已开源 https://github.com/daniel-qian/fourpack（PUBLIC）。本地目录 build4me→fourpack（改名末步需 Danny 终端手动）。视频 v2 真机演示脚本已录（4:44，minimax code）+ 续 loop 段。landing 已挂 app.ima-read.com/zh/fourpack 与 /en/fourpack，可作为营销承接页和短视频结尾 5 秒展示素材。"
+  "_note": "feat-001~009 全部 done。已开源 https://github.com/daniel-qian/fourpack（PUBLIC）。landing 双部署：国内权威在 app.ima-read.com/zh|en/fourpack（ECS+systemd+扁平文件计数，权威源）；海外镜像在 fourpack.vercel.app（Vercel serverless，计数代理回国内，push main 自动部署）。本地目录 build4me→fourpack（改名末步需 Danny 终端手动）。视频 v2 真机演示脚本已录（4:44，minimax code）+ 续 loop 段。"
 }
