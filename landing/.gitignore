@@ -1,2 +1,4 @@
 data/
 .tmp-browser-events.jsonl
+.vercel
+.vercel-local-check.mjs

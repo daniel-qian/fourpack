@@ -1,0 +1,15 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": null,
+  "redirects": [
+    { "source": "/", "destination": "/zh", "permanent": false }
+  ],
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/api" }
+  ],
+  "functions": {
+    "api/index.mjs": {
+      "includeFiles": "public/**"
+    }
+  }
+}

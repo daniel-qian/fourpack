@@ -268,6 +268,15 @@ function escapeHtml(value) {
 }
 
 function readBody(req, limit = 4096) {
+  // Some serverless runtimes (e.g. Vercel) parse and consume the request
+  // stream before our handler runs, exposing it as req.body. Use that when
+  // present; the plain Node http server leaves req.body undefined and falls
+  // through to reading the stream.
+  if (req.body !== undefined && req.body !== null && req.body !== '') {
+    const raw = typeof req.body === 'string' ? req.body : JSON.stringify(req.body);
+    return Promise.resolve(raw);
+  }
+
   return new Promise((resolveBody, rejectBody) => {
     let body = '';
     req.setEncoding('utf8');
@@ -296,11 +305,16 @@ function staticFilePath(urlPath) {
   return pathInsidePublic ? fullPath : null;
 }
 
-export function createApp(options = {}) {
+// Returns a plain (req, res) handler usable by both Node's http.createServer
+// (the boring China deploy) and a Vercel serverless function (the overseas
+// mirror). The store is injectable and may be sync (filesystem) or async
+// (a proxy that forwards to the authoritative deploy) — that's why the two
+// store calls below are awaited.
+export function createRequestListener(options = {}) {
   const store = options.store ?? createStore(options.eventsPath ?? eventsPath);
   const mountPaths = normalizeBasePaths(options);
 
-  const server = createServer(async (req, res) => {
+  const listener = async (req, res) => {
     const url = new URL(req.url, 'http://localhost');
     const route = stripBasePath(url.pathname, mountPaths);
 
@@ -312,7 +326,7 @@ export function createApp(options = {}) {
     const { pathname, mountPath, locale } = route;
 
     if (req.method === 'GET' && pathname === '/api/stats') {
-      return sendJson(res, 200, store.stats());
+      return sendJson(res, 200, await store.stats());
     }
 
     if (req.method === 'POST' && pathname === '/api/copy') {
@@ -321,8 +335,8 @@ export function createApp(options = {}) {
         if (!targets.has(payload.target)) {
           return sendJson(res, 400, { error: 'target must be "setup" or "loop"' });
         }
-        store.record(payload.target);
-        return sendJson(res, 200, { ok: true, stats: store.stats() });
+        await store.record(payload.target);
+        return sendJson(res, 200, { ok: true, stats: await store.stats() });
       } catch (error) {
         return sendJson(res, error.statusCode ?? 400, { error: 'invalid json body' });
       }
@@ -356,9 +370,16 @@ export function createApp(options = {}) {
       res.writeHead(404, { 'content-type': 'text/plain; charset=utf-8' });
       return res.end('Not found');
     }
-  });
+  };
 
-  server.on('close', () => store.close());
+  listener.store = store;
+  return listener;
+}
+
+export function createApp(options = {}) {
+  const listener = createRequestListener(options);
+  const server = createServer(listener);
+  server.on('close', () => listener.store.close());
   return server;
 }
 
