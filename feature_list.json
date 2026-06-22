@@ -55,7 +55,15 @@
       "dependencies": ["feat-002", "feat-005"],
       "status": "done",
       "evidence": "2026-06-19 落地 .claude/skills/fourpack-loop/SKILL.md：6 步（对齐→maker 写→三角色逐个出声挑错→改→复检→收尾），红线=写的人≠检查的人、每步出声、零黑话、别过度。init.sh required 已纳入该 skill；fourpack 设置 skill 收尾处提示了它（Claude Code 用户用，纯对话框用户回退到手动节奏）。Venessa+viewer 裁决见 .issues/feat-007/。Gate: init.sh 绿。"
+    },
+    {
+      "id": "feat-008",
+      "name": "fourpack 极简 landing + 两个复制计数",
+      "description": "给营销视频承接一个极简 landing：首屏展示 fourpack 的两个起手式（setup / loop）和快速复制按钮；只记录两个复制按钮分别被点了几次。挂到 app.ima-read.com，保持无登录、无复杂埋点、无重型后台，专心服务营销转化。",
+      "dependencies": ["feat-001", "feat-007"],
+      "status": "done",
+      "evidence": "2026-06-21 已上线到 https://app.ima-read.com/zh/fourpack 和 /en/fourpack。远端 systemd 服务 fourpack-landing 监听 127.0.0.1:4173，Nginx 只代理 ^/(zh|en)/fourpack，不接管 /fourpack，保留 imaread 的语言跳转逻辑。JSONL 只记 setup/loop 按钮点击，页面显示公开计数器。验证：本地 npm run smoke PASS；远端 npm run smoke PASS；公网 curl zh/en 200、/fourpack 仍 307 到 /zh/fourpack；真实浏览器打开公网 zh/en，点击两个按钮后计数 setup=1 loop=1。Gate: init.sh 绿。 | 2026-06-22 landing 改版并已重新部署：(1) 复制按钮之前只复制被砍掉的一句话（fourpack：… 短调用，纯对话框没用），改为复制清单里的完整命令块（zh/en 各一段，data-copy-text 带换行）；(2) 每张卡加可展开 <details>『展开完整命令 / Show the full command』，默认折叠、<pre> 内可滚；(3) 全面去掉『提示词 / prompt』字样改用『命令』（顶部 CTA『复制两个提示词』→改成滚动链接『看这两个命令 / See the two commands』，按钮『复制 setup/loop 命令』，EN headline『Two starter prompts→commands』），避免被当成提示词复制器、为以后扩内容留口。改源：server.mjs（pageCopy 全量命令块 + expandLabel）、public/index.html（details/summary/pre）、public/styles.css、smoke.mjs（断言改 Two starter commands）、landing/README.md。部署：scp 5 文件到 /srv/fourpack-landing（先备份到 .bak-20260622/），systemctl restart fourpack-landing。验证：本地 npm run smoke PASS；远端 npm run smoke PASS；公网 zh/en 200、/fourpack 仍 307；live HTML 确认完整命令块在页内 + 复制属性、命令文案、0 处『提示词/prompt』残留；计数 setup=4 loop=3 部署后保留未重置（EVENTS_PATH 在 /var/lib 外挂）。Gate: init.sh 绿。"
     }
   ],
-  "_note": "feat-001~007 全部 done 并独立验收。已开源 https://github.com/daniel-qian/fourpack（PUBLIC）。本地目录 build4me→fourpack（改名末步需 Danny 终端手动）。视频 v2 真机演示脚本已录（4:44，minimax code）+ 续 loop 段。唯一未闭环=埋点（等 Danny 点头）。"
+  "_note": "feat-001~008 全部 done。已开源 https://github.com/daniel-qian/fourpack（PUBLIC）。本地目录 build4me→fourpack（改名末步需 Danny 终端手动）。视频 v2 真机演示脚本已录（4:44，minimax code）+ 续 loop 段。landing 已挂 app.ima-read.com/zh/fourpack 与 /en/fourpack，可作为营销承接页和短视频结尾 5 秒展示素材。"
 }

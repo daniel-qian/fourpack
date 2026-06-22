@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="%HTMLLANG%">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>%TITLE%</title>
+    <meta
+      name="description"
+      content="%DESCRIPTION%"
+    >
+    <link rel="stylesheet" href="%BASE_PATH%/styles.css">
+  </head>
+  <body>
+    <main class="shell">
+      <section class="hero" aria-labelledby="hero-title">
+        <p class="eyebrow">%EYEBROW%</p>
+        <h1 id="hero-title">%HEADLINE%</h1>
+        <p class="lede">%LEDE%</p>
+        <div class="hero-actions">
+          <a class="primary-link" href="#commands">%PRIMARYCTA%</a>
+          <a class="secondary-link" href="https://github.com/daniel-qian/fourpack" rel="noreferrer">%GITHUBCTA%</a>
+        </div>
+      </section>
+
+      <section class="flow-strip" aria-label="Fourpack flow">
+        <span>%STEPONE%</span>
+        <span>%STEPTWO%</span>
+        <span>%STEPTHREE%</span>
+      </section>
+
+      <p class="proof-line" aria-live="polite">
+        %COPIEDPREFIX%setup <strong id="setup-count">0</strong>%COPIEDBETWEEN%loop <strong id="loop-count">0</strong>%COPIEDSUFFIX%
+      </p>
+
+      <section id="commands" class="commands" aria-label="Fourpack commands">
+        <article class="command-card">
+          <div>
+            <p class="label">Setup</p>
+            <h2>%SETUPHEADING%</h2>
+            <p>%SETUPBODY%</p>
+          </div>
+          <details class="command-detail">
+            <summary>%EXPANDLABEL%</summary>
+            <pre><code id="setup-command">%SETUPCOMMAND%</code></pre>
+          </details>
+          <button
+            class="copy-button"
+            data-copy-target="setup"
+            data-copy-text="%SETUPCOMMAND%"
+          >
+            %SETUPBUTTON%
+          </button>
+        </article>
+
+        <article class="command-card">
+          <div>
+            <p class="label">Loop</p>
+            <h2>%LOOPHEADING%</h2>
+            <p>%LOOPBODY%</p>
+          </div>
+          <details class="command-detail">
+            <summary>%EXPANDLABEL%</summary>
+            <pre><code id="loop-command">%LOOPCOMMAND%</code></pre>
+          </details>
+          <button
+            class="copy-button"
+            data-copy-target="loop"
+            data-copy-text="%LOOPCOMMAND%"
+          >
+            %LOOPBUTTON%
+          </button>
+        </article>
+      </section>
+    </main>
+
+    <script src="%BASE_PATH%/app.js" type="module"></script>
+  </body>
+</html>
