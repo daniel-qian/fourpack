@@ -114,7 +114,7 @@ const pageCopy = {
     lede:
       '第一个 setup 先给项目搭好四件套；第二个 loop 在每次开发、修 bug 时让 AI 先写、再挑错、再改。不用登录，不用 dashboard，不用学四十分钟。',
     primaryCta: '看这两个命令',
-    githubCta: 'GitHub / daniel-qian/fourpack',
+    githubCta: 'GitHub / daniel-qian/4packs',
     stepOne: '1. 搭底子',
     stepTwo: '2. 每次开发循环',
     stepThree: '3. 让下一轮接得上',
@@ -140,7 +140,7 @@ const pageCopy = {
     lede:
       'Use setup once to give a new project its four plain-language files. Use loop every time you build or fix something, so the agent writes, checks, and revises before handing work back.',
     primaryCta: 'See the two commands',
-    githubCta: 'GitHub / daniel-qian/fourpack',
+    githubCta: 'GitHub / daniel-qian/4packs',
     stepOne: '1. Set the base',
     stepTwo: '2. Loop every change',
     stepThree: '3. Keep the next run warm',

@@ -101,6 +101,6 @@ Don't rush to say "done." Do it like this:
 (Key: the you that writes and the you that finds faults must be separate — don't grade your own work.)
 ```
 
-> On Claude Code this is already packaged as the `fourpack-loop` skill, so you don't paste it each time — see GitHub: github.com/daniel-qian/fourpack.
+> On Claude Code this is already packaged as the `fourpack-loop` skill, so you don't paste it each time — see GitHub: github.com/daniel-qian/4packs.
 
 > This checklist itself was made with this exact method. Not a slide deck — it's actually running.

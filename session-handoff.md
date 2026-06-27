@@ -1,16 +1,16 @@
 # session-handoff.md — fourpack（四件套）· 交接
 
-> 2026-06-22 更新。冷启动接手顺序：本文件 → `progress.md` → `feature_list.json` → `roles.md`。
+> 2026-06-27 更新。冷启动接手顺序：本文件 → `progress.md` → `feature_list.json` → `roles.md`。
 
 ## 一句话
 
-**fourpack feat-001~009 全 done 并独立验收，`init.sh` 绿，已开源 PUBLIC。landing 双部署:国内权威 app.ima-read.com/zh|en/fourpack(ECS,权威计数源)+ 海外镜像 https://fourpack.vercel.app(Vercel serverless,计数代理回国内,push main 自动部署)。所有改动已 commit + push 到 main。**
+**fourpack feat-001~009 全 done 并独立验收，`init.sh` 绿，已开源 PUBLIC。当前本地路径 `D:\4packs`，GitHub repo `daniel-qian/4packs`。landing 双部署:国内权威 app.ima-read.com/zh|en/fourpack(ECS,权威计数源)+ 海外镜像 https://fourpack.vercel.app(Vercel serverless,计数代理回国内,push main 自动部署)。产品名和 skill 名仍是 `fourpack`。**
 
 ## ⚠️ 路径（新 session 必读）
 
-- **本地目录计划改名 `D:\build4me` → `D:\fourpack`，但末步要 Danny 终端手动**（会话锁着，改不了自己的 cwd）。改完后**在 `D:\fourpack` 冷启动**；没改就还在 `D:\build4me`。
-- GitHub：**https://github.com/daniel-qian/fourpack**（PUBLIC，main，已 push）。
-- landing 本地目录：`D:\build4me\landing`
+- **本地目录：`D:\4packs`**。
+- GitHub：**https://github.com/daniel-qian/4packs**（PUBLIC，main）。
+- landing 本地目录：`D:\4packs\landing`
 - landing 线上目录：`/srv/fourpack-landing`
 - landing 线上数据：`/var/lib/fourpack-landing/copy-events.jsonl`
 
@@ -71,7 +71,7 @@ ssh root@120.55.97.151 "systemctl restart fourpack-landing && cd /srv/fourpack-l
 ## feat-009 海外 Vercel 镜像（2026-06-22 新增）
 
 - 线上:**https://fourpack.vercel.app**(`/` → 307 `/zh`,英文 `/en`)。
-- Vercel 项目 `kks-projects-84cf18eb/fourpack`,root directory=`landing`,已 git connect `daniel-qian/fourpack`,生产分支 `main` → **push main 自动部署**。
+- Vercel 项目 `kks-projects-84cf18eb/fourpack`,root directory=`landing`,已 git connect `daniel-qian/4packs`,生产分支 `main` → **push main 自动部署**。
 - 代码(都在 `landing/`):`api/index.mjs`(serverless,复用 `server.mjs` 的 `createRequestListener` 同套 zh/en 模板)+ `api/_store.mjs`(计数**服务端代理**到 `FOURPACK_UPSTREAM`,默认国内 API)+ `vercel.json`(全路由 rewrite 到函数、`/`→`/zh`、includeFiles public)。
 - 计数器:Vercel 文件系统临时、又不新增数据库,所以代理读/写回国内权威计数;上游不可达优雅降级 0。**国内 ECS 仍是权威源**,Vercel 是镜像。
 - 国内访问 Vercel / 跑 vercel CLI 必须带代理:`NODE_USE_ENV_PROXY=1` + `HTTP_PROXY/HTTPS_PROXY`。
@@ -79,16 +79,15 @@ ssh root@120.55.97.151 "systemctl restart fourpack-landing && cd /srv/fourpack-l
 
 ## 视频（Click-Reader，配套，非 fourpack 仓库内容）
 
-- 4packs 短视频目录：`D:\build4me\4packs-marketing\video\videos\002-fourpack-short\`
+- 4packs 短视频目录：`D:\4packs\4packs-marketing\video\videos\002-fourpack-short\`
 - 当前已可把 landing 补进结尾 5 秒：展示 `app.ima-read.com/zh/fourpack`、两个复制按钮、计数器、GitHub/域名卡片。
 - Danny 出片流程 = **口播稿直接进剪映 TTS**（记忆 [[danny-voiceover-tts-workflow]]）；**别给他 SVG**（记忆 [[danny-no-svg-use-raster]]）。
 
 ## 仍待 Danny
 
-1. 本地改名 build4me→fourpack（终端手动,会话锁着改不了）。
-2. git 历史 imaread 抹除（force-push 改写历史，破坏性，等点头）。
-3. 远端 `.bak-20260622/`（旧版备份）线上确认无误后可删。
-4. 海外计数依赖国内 API 可达;若想让海外独立计数,需点头才考虑引入数据存储(当前 scope 不允许擅自加)。
+1. git 历史 imaread 抹除（force-push 改写历史，破坏性，等点头）。
+2. 远端 `.bak-20260622/`（旧版备份）线上确认无误后可删。
+3. 海外计数依赖国内 API 可达;若想让海外独立计数,需点头才考虑引入数据存储(当前 scope 不允许擅自加)。
 
 ## 硬规则（先于一切，沿用）
 
@@ -100,4 +99,4 @@ ssh root@120.55.97.151 "systemctl restart fourpack-landing && cd /srv/fourpack-l
 
 ## 别做（除非 Danny 点头）
 
-- 别把生成物搞复杂；别擅自改写 git 历史 / 改本地目录名；别把 landing 扩成用户系统或分析后台。
+- 别把生成物搞复杂；别擅自改写 git 历史；别把 landing 扩成用户系统或分析后台。

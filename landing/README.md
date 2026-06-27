@@ -94,7 +94,7 @@ The same code also runs as an overseas mirror on Vercel for fast global access:
 **https://fourpack.vercel.app** (→ redirects to `/zh`, English at `/en`).
 
 - Vercel project: `kks-projects-84cf18eb/fourpack`, root directory `landing`,
-  connected to GitHub `daniel-qian/fourpack`. **Pushing to `main` auto-deploys.**
+  connected to GitHub `daniel-qian/4packs`. **Pushing to `main` auto-deploys.**
 - `api/index.mjs` is a serverless function that reuses the exact same zh/en
   templating from `server.mjs` (see `createRequestListener`). `vercel.json`
   rewrites every path to it, so it serves pages, static assets, and the counter.

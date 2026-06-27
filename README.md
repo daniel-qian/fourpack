@@ -21,7 +21,7 @@
 **最简装法：clone 整个仓库**，`.claude/skills/` 里两个技能现成可用，还顺带把清单和示例都拿到：
 
 ```bash
-git clone https://github.com/daniel-qian/fourpack.git
+git clone https://github.com/daniel-qian/4packs.git
 ```
 
 （只想要技能、不想要整仓库？把 `.claude/skills/fourpack` 和 `.claude/skills/fourpack-loop` 两个文件夹拷进你自己项目的 `.claude/skills/`，或拷到 `~/.claude/skills/` 全局可用。）

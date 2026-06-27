@@ -1,14 +1,23 @@
 # progress.md — 笔记本（冷启动也能读懂）
 
-## Current State（2026-06-22）
+## Current State（2026-06-27）
 
-**fourpack feat-001~009 全 done，`init.sh` 绿，已开源 PUBLIC。landing 现在双部署:国内权威(ECS)+ 海外镜像(Vercel,本轮新增)。海外镜像 push main 自动部署,计数代理回国内,一个计数器。**
+**fourpack feat-001~009 全 done，`init.sh` 绿，已开源 PUBLIC。当前本地路径是 `D:\4packs`；GitHub repo slug 同步为 `daniel-qian/4packs`，产品名和 skill 名仍是 `fourpack`。landing 双部署:国内权威(ECS)+ 海外镜像(Vercel),计数代理回国内,一个计数器。**
+
+### 本轮(2026-06-27)做的事:本地路径 + GitHub repo 改名同步
+
+- 本地 checkout 顶层确认是 `D:\4packs`，基线 `bash init.sh` PASS。
+- GitHub 旧 repo `daniel-qian/fourpack` 改名为 `daniel-qian/4packs`（PUBLIC，main 不变）。
+- 本地 `origin` 改到 `https://github.com/daniel-qian/4packs.git`。
+- 面向用户的 GitHub CTA / clone URL 已同步到 `github.com/daniel-qian/4packs`。
+- 保留 `fourpack` 作为产品名和 Claude Code skill 名；不把 `.claude/skills/fourpack` / `.claude/skills/fourpack-loop` 改名，避免破坏已发布用法。
+- 注意：GitHub 会保留旧仓库 URL redirect，但新文档和新 clone URL 统一用 `4packs`。
 
 ### 本轮(2026-06-22)做的事:海外 Vercel 部署(feat-009)
 
 - **线上地址(海外镜像):** https://fourpack.vercel.app （`/` → 307 `/zh`,英文 `/en`）。
 - **为什么:** 国内 ECS(`app.ima-read.com`)国外访问慢;要一份海外节点快速访问,且保持无登录、不新增数据库。
-- **Vercel 项目:** `kks-projects-84cf18eb/fourpack`,root directory = `landing`,已 `vercel git connect` 到 `daniel-qian/fourpack`,生产分支 `main`。**→ 之后 push main 自动部署。** rootDirectory 是建项目后用 Vercel REST API `PATCH` 设上的(`vercel link` 默认没设,会导致 git 部署从仓库根构建失败)。
+- **Vercel 项目:** `kks-projects-84cf18eb/fourpack`,root directory = `landing`,已 `vercel git connect` 到 `daniel-qian/4packs`,生产分支 `main`。**→ 之后 push main 自动部署。** rootDirectory 是建项目后用 Vercel REST API `PATCH` 设上的(`vercel link` 默认没设,会导致 git 部署从仓库根构建失败)。
 - **代码改动(都在 `landing/`,已 commit `1b5947f`):**
   - `server.mjs`:抽出 `createRequestListener(options)`(store 可注入,调用改 `await`,支持异步 store);`createApp` 包它,smoke 行为不变;`readBody` 兼容 serverless 已解析的 `req.body`。
   - `api/index.mjs`:Vercel serverless 函数,复用同一套 zh/en 模板(`createRequestListener`)。
@@ -37,7 +46,7 @@
 - feat-007:`.claude/skills/fourpack-loop` 自循环技能。
 - feat-008:国内 landing + zh/en + 两个按钮点击计数。
 - feat-009:海外 Vercel 镜像(push 自动部署 + 计数代理回国内)。
-- 已开源:https://github.com/daniel-qian/fourpack（PUBLIC）。
+- 已开源:https://github.com/daniel-qian/4packs（PUBLIC）。
 
 ## 可复制验证命令
 
@@ -62,7 +71,6 @@ NODE_USE_ENV_PROXY=1 vercel ls --scope kks-projects-84cf18eb
 
 ## 仍待 Danny（产品老账,需手动或点头）
 
-1. **本地目录 `D:\build4me → D:\fourpack`**:会话锁着改不了。关会话后终端 `Rename-Item -Path 'D:\build4me' -NewName 'fourpack'`,下次在 `D:\fourpack` 冷启动。
-2. **git 历史里的 imaread**(首提交):彻底抹除需 force-push 改写历史(破坏性),等点头。
-3. 远端 `/srv/fourpack-landing/.bak-20260622/`(旧版备份)确认线上没问题后可删。
-4. 海外计数依赖国内 API 可达;若哪天想让海外独立计数,需 Danny 点头才考虑引入数据存储(当前 scope 不允许擅自加)。
+1. **git 历史里的 imaread**(首提交):彻底抹除需 force-push 改写历史(破坏性),等点头。
+2. 远端 `/srv/fourpack-landing/.bak-20260622/`(旧版备份)确认线上没问题后可删。
+3. 海外计数依赖国内 API 可达;若哪天想让海外独立计数,需 Danny 点头才考虑引入数据存储(当前 scope 不允许擅自加)。
